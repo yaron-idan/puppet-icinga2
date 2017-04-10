@@ -6,6 +6,7 @@ mod 'puppetlabs/apt', :latest
 mod 'puppetlabs/chocolatey', :latest
 mod 'puppetlabs/powershell', :latest
 mod 'puppetlabs/mysql', :latest
+mod 'puppetlabs/postgresql', :latest
 mod 'badgerious/windows_env', :latest
 mod 'darin/zypprepo', :latest
 mod 'icinga2',

@@ -26,7 +26,25 @@ describe 'MySQL IDO Feature' do
     it { should be_listening.with('tcp') }
   end
 
-  context command('mysql -e "select version from icinga_dbversion" icinga2') do
+  context command('export MYSQL_PWD=supersecret; mysql -u icinga2 -e "select version from icinga_dbversion" icinga2') do
     its(:stdout) { should match(%r{version}) }
+  end
+
+  describe file('/var/log/icinga2/icinga2.log') do
+    its(:content) { should match /IdoMysqlConnection: MySQL IDO instance id: 1/ }
+  end
+end
+
+describe 'PostgreSQL IDO Feature' do
+  context port(5432) do
+    it { should be_listening.with('tcp') }
+  end
+
+  context command('export PGPASSWORD=supersecret; psql -h localhost -U icinga2 -d icinga2 -w -c "select version from icinga_dbversion"') do
+    its(:stdout) { should match(%r{version}) }
+  end
+
+  describe file('/var/log/icinga2/icinga2.log') do
+    its(:content) { should match /IdoPgsqlConnection: pgSQL IDO instance id: 1/ }
   end
 end
