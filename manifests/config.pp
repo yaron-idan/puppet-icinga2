@@ -13,7 +13,7 @@
 #
 class icinga2::config {
 
-  if defined($caller_module_name) and $module_name != $caller_module_name {
+  if !defined($caller_module_name) or $module_name != $caller_module_name {
     fail("icinga2::config is a private class of the module icinga2, you're not permitted to use it.")
   }
 
