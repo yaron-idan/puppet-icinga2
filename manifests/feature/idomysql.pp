@@ -129,7 +129,7 @@ class icinga2::feature::idomysql(
   $user                   = 'icinga',
   $password               = 'icinga',
   $database               = 'icinga',
-  $enable_ssl             = false,
+  $enable_ssl             = undef,
   $pki                    = 'puppet',
   $ssl_key_path           = undef,
   $ssl_cert_path          = undef,
